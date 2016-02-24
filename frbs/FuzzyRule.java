@@ -57,17 +57,35 @@ public class FuzzyRule extends nrc.fuzzy.FuzzyRule{
     }
 
     public FuzzyValue fireRule(FuzzyValue inputs[]) throws IncompatibleRuleInputsException {
-        /********************************************************/
-        /** COMPLETAR CÓDIGO: INFERENCIA ************************/
-        /********************************************************/
-        /** NOTA: La variable antecedents es un HashSet que se **/
-        /** utiliza para saber si un Conjunto difuso dentro de **/
-        /** la variable en que se ha definido pertenece a los ***/
-        /** antecedentes de la regla o no. El nombre de la ******/
-        /** variable en la que se define un Valor difuso se *****/
-        /** saber mediante: varFuzzyValue.getFuzzyVariable().getName() **/
-        /********************************************************/
+        // Delete all the inputs added in previous inferences
+        removeAllInputs();
+        // Add new inputs
+        for (FuzzyValue input : inputs){
+            if(antecedents.contains(input.getFuzzyVariable().getName()))
+                addInput(input);
+        }
 
-        return null;
+
+        // If there is a match, make the inference
+        if (testRuleMatching()){
+            FuzzyValue value =  new FuzzyValue(execute().fuzzyValueAt(0)); //Center of mass
+            try{
+                value.momentDefuzzify();
+                return value;
+            }
+            catch(Exception e){
+                try {
+                    value.momentDefuzzify();
+                    return value;
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                    return null;
+                }
+            }
+        }
+        // If there is not a match, we return null
+        else
+            return null;
+
     }
 }
