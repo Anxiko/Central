@@ -68,6 +68,39 @@ public class FRBS {
 
     //We use FITA inference process
     private double FITA(ArrayList<FuzzyRule> rules, FuzzyValue[] fuzzy_input) throws XValuesOutOfOrderException, InvalidDefuzzifyException, IncompatibleRuleInputsException {
+		/**Completar Código*/
+
+        /** INFORMACIÓN ÚTIL PARA COMPLETAR ESTA FUNCIÓN**/
+
+        /** 1) AL DISPARAR UNA REGLA SE OBTIENE UN FuzzyValue OBJECT.
+         * SE DEBE UTILIZAR LA FUNCIÓN "getMaxY()" PARA OBTENER
+         * EL NIVEL DE CORTE
+         * SE DEBE UTILZIAR LA FUNCIÓN "momentDefuzzify()" PARA
+         * OBTER EL VALOR REAL RESULTANTE DE LA DEFUZZIFICAZIÓN**/
+        /**
+         * 2) LA VARIABLE "lastInferenceProcess" ES UN ARRAY DE STRINGS QUE
+         * CONTIENE LÍNEAS DE CÓDIGO HTML. ESTA INFOTMACIÓN SERÁ IMPRIMIDA
+         * EN LA INTERFAZ COMO AYUDA SOBRE EL PROCESO DE INFERENCIA.
+         * ==================================================================
+         * PARA QUE MUESTRE QUÉ REGLAS SE HAN DISPARADO, HAY QUE INCLUIR EL
+         * SIGUIENTE CÓDIGO (¡SOLO PARA AQUELLAS REGLAS QUE SE DISPARAN!):
+         * lastInferenceProcess.add(rules.get(i).toString();
+         *
+         * SI ADEMÁS QUERÉIS QUE SE MUESTRE EL NIVEL DE CORTE Y LA SALIDA INDIVIDUAL
+         * DE ESTAS REGLAS HAY QUE INCLUIR EL SIGUIENTE CÓDIGO. COMO ESTOS VALORES
+         * SON NÚMEROS REALES, SE UTILIZA UN DecimalFormatter PARA IMPRIMIR LOS NÚMEROS
+         * CON UNA PRECISIÓN DE DOS DECIMALES. HAY QUE CREAR PARA ELLO UN OBJETO DE ESTE TIPO
+         * DecimalFormat formatter = new DecimalFormat("#.00");. EL CÓDIGO QUEDARÍA ASÍ:
+         * lastInferenceProcess.add(rules.get(i).toString()+
+         * " <i>(fire level: "+formatter.format(fireLevel)+
+         * "; rule output: "+formatter.format(ruleOutputVal)+")</i><br>");
+         *
+         * PARA ADEMAS AÑADIR LA INFORMACIÓN SOBRE LA SALIDA GLOBAL DEL SISTEMA,
+         * ANTES DEL RETURN DE LA FUNCIÓN PONER EL SIGUIENTE CÓDIGO (REEMPLAZAR
+         * salidaGlobal POR LA EXPRESIÓN/VARIABLE CORRESPONDIENTE):
+         * lastInferenceProcess.add("<h3>Global output: "+
+         * formatter.format(salidaGlobal+"</h3>");
+         */
         //Some variables for statistics
         double ruleOutputVal;
         double fireLevel;
