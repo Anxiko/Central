@@ -70,9 +70,9 @@ public class Rulebase {
         //Reglas para temperatura
         
         //Reglas simples
-        addRuleForValveTemperature("Low",null,"VeryHigh");
+        addRuleForValveTemperature("Low",null,"High");
         addRuleForValveTemperature("Medium",null,"Medium");
-        addRuleForValveTemperature("High",null,"VeryLow");
+        addRuleForValveTemperature("High",null,"Low");
         
         //Reglas compuestas
         //Casos extremos
@@ -88,9 +88,9 @@ public class Rulebase {
         //Reglas para presión
         
         //Reglas simples
-        addRuleForValvePressure(null,"Low","VeryHigh");
+        addRuleForValvePressure(null,"Low","High");
         addRuleForValvePressure(null,"Medium","Medium");
-        addRuleForValvePressure(null,"High","VeryLow");
+        addRuleForValvePressure(null,"High","Low");
         
         //Reglas compuestas
         //Casos extremos
