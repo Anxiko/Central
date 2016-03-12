@@ -70,37 +70,37 @@ public class Rulebase {
         //Reglas para temperatura
         
         //Reglas simples
-        addRuleForValveTemperature("Low",null,"High");
+        addRuleForValveTemperature("Low",null,"VeryHigh");
         addRuleForValveTemperature("Medium",null,"Medium");
-        addRuleForValveTemperature("High",null,"Low");
+        addRuleForValveTemperature("High",null,"VeryLow");
         
         //Reglas compuestas
         //Casos extremos
-        addRuleForValveTemperature("Low","Low","VeryHigh");
-        addRuleForValveTemperature("High","High","VeryLow");
-        //Regulación mutua
-        addRuleForValveTemperature("Low","High","Medium");
-        addRuleForValveTemperature("High","Low","Medium");
-        //Prevención
-        addRuleForValveTemperature("Medium","Low","High");
-        addRuleForValveTemperature("Medium","High","Low");
+//        addRuleForValveTemperature("Low","Low","VeryHigh");
+//        addRuleForValveTemperature("High","High","VeryLow");
+//        //Regulación mutua
+//        addRuleForValveTemperature("Low","High","Medium");
+//        addRuleForValveTemperature("High","Low","Medium");
+//        //Prevención
+//        addRuleForValveTemperature("Medium","Low","High");
+//        addRuleForValveTemperature("Medium","High","Low");
         
         //Reglas para presión
         
         //Reglas simples
-        addRuleForValvePressure(null,"Low","High");
+        addRuleForValvePressure(null,"Low","VeryHigh");
         addRuleForValvePressure(null,"Medium","Medium");
-        addRuleForValvePressure(null,"High","Low");
+        addRuleForValvePressure(null,"High","VeryLow");
         
         //Reglas compuestas
         //Casos extremos
-        addRuleForValvePressure("Low","Low","VeryHigh");
-        addRuleForValvePressure("High","High","VeryLow");
-        //Regulación mutua
-        addRuleForValvePressure("Low","High","Medium");
-        addRuleForValvePressure("High","Low","Medium");
-        //Prevención
-        addRuleForValvePressure("Low","Medium","High");
-        addRuleForValvePressure("High","Medium","Low");
+//        addRuleForValvePressure("Low","Low","VeryHigh");
+//        addRuleForValvePressure("High","High","VeryLow");
+//        //Regulación mutua
+//        addRuleForValvePressure("Low","High","Medium");
+//        addRuleForValvePressure("High","Low","Medium");
+//        //Prevención
+//        addRuleForValvePressure("Low","Medium","High");
+//        addRuleForValvePressure("High","Medium","Low");
     }
 }
