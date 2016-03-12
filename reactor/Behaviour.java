@@ -44,12 +44,14 @@ public class Behaviour {
                 valvePresStep = 250;
                 tempStep = 1f;
                 presStep = 1f;
+                System.out.println("Modo = 2");
                 break;
             default://1
                 valveTempStep = 250;
                 valvePresStep = 250;
                 tempStep = 10;
                 presStep = 10;
+                System.out.println("Modo = 1");
                 break;
 
         }
