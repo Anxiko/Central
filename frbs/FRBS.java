@@ -68,7 +68,7 @@ public class FRBS {
 
     //We use FITA inference process
     private double FITA(ArrayList<FuzzyRule> rules, FuzzyValue[] fuzzy_input) throws XValuesOutOfOrderException, InvalidDefuzzifyException, IncompatibleRuleInputsException {
-		/**Completar Código*/
+        /**Completar Código*/
 
         /** INFORMACIÓN ÚTIL PARA COMPLETAR ESTA FUNCIÓN**/
 
@@ -101,46 +101,36 @@ public class FRBS {
          * lastInferenceProcess.add("<h3>Global output: "+
          * formatter.format(salidaGlobal+"</h3>");
          */
-        //Some variables for statistics
-        double ruleOutputVal;
-        double fireLevel;
-        double globalOutput = 0;
-        double sumFireLevels = 0;
-        int numFiredRules=0;
-
-        DecimalFormat formatter = new DecimalFormat("#.00");
-
-        FuzzyValue ruleOutput;
-        //If rules is null, no rule can be fired so it returns a NaN
-        if (rules==null){
+        
+        //Si no hay reglas, devuelve NaN
+        if (rules==null)
             return Double.NaN;
-        }
-
-        for (int i=0;i<rules.size();i++){
-            // If any rule is null, it continues
-            if (rules.get(i)==null){
-                System.out.println("ERROR: Attempt to use a null object as a FuzzyRule.");
-                continue;
-            }
-
-            //Inference
-            ruleOutput = rules.get(i).fireRule(fuzzy_input);
-            // If ruleOutput is not null, we know it as a valid output
-            if (ruleOutput!=null && ruleOutput.getMaxY()>0){
-                fireLevel = ruleOutput.getMaxY(); // The cut level
-                ruleOutputVal = ruleOutput.momentDefuzzify(); //Defuzzify
-                globalOutput+= ruleOutputVal*fireLevel;
-                sumFireLevels+=fireLevel;
-                numFiredRules++;
-                lastInferenceProcess.add(rules.get(i).toString()+" <i>(fire level: "+formatter.format(fireLevel)+"; rule output: "+formatter.format(ruleOutputVal)+")</i><br>");
+        
+        DecimalFormat formatter = new DecimalFormat("#.00");//Formateador
+        double pesoTotal=0.0;//Peso de todas las reglas disparadas
+        double valorTotal=0.0;//Valor total de la regla
+        try
+        {
+            for (FuzzyRule rule : rules)//Dispara cada una de las reglas
+            {
+                FuzzyValue conj_dif=rule.fireRule(fuzzy_input);//Dispara la regla y obten el conjunto difuso resultante
+                if (conj_dif.getMaxY()>0)//Si la salida es mayor a cero, considerala
+                {
+                    double peso=conj_dif.getMaxY();//Peso de salida de la regla
+                    double valor=conj_dif.momentDefuzzify();//Valor de salida de la válvula
+                    valorTotal+=peso*valor;//Añade la salida al total
+                    pesoTotal+=peso;//Añade el peso al total
+                    lastInferenceProcess.add(rule.toString()+" <i>(Peso: "+formatter.format(peso)+"; valor de la válvula: "+formatter.format(valor)+")</i><br>");
+                }
             }
         }
-
-        // If no rules has been fired, it returns a NaN
-        if (numFiredRules==0)
+        catch (NullPointerException ne)
+        {
+            System.out.println("Error! Desreferenciado puntero a null, "+ne);
+        }
+        
+        if (pesoTotal==0)//Si no se ha disparado ninguna regla
             return Double.NaN;
-        lastInferenceProcess.add("<h3>Global output: "+formatter.format(globalOutput/sumFireLevels)+"</h3>");
-        // Else, it returns the average of all the individual
-        return globalOutput/sumFireLevels;
+        return valorTotal/pesoTotal;//Devuelve la media ponderada
     }
 }
