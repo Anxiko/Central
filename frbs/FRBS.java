@@ -113,14 +113,17 @@ public class FRBS {
         {
             for (FuzzyRule rule : rules)//Dispara cada una de las reglas
             {
-                FuzzyValue conj_dif=rule.fireRule(fuzzy_input);//Dispara la regla y obten el conjunto difuso resultante
-                if (conj_dif.getMaxY()>0)//Si la salida es mayor a cero, considerala
+                if (rule!=null)
                 {
-                    double peso=conj_dif.getMaxY();//Peso de salida de la regla
-                    double valor=conj_dif.momentDefuzzify();//Valor de salida de la válvula
-                    valorTotal+=peso*valor;//Añade la salida al total
-                    pesoTotal+=peso;//Añade el peso al total
-                    lastInferenceProcess.add(rule.toString()+" <i>(Peso: "+formatter.format(peso)+"; valor de la válvula: "+formatter.format(valor)+")</i><br>");
+                    FuzzyValue conj_dif=rule.fireRule(fuzzy_input);//Dispara la regla y obten el conjunto difuso resultante
+                    if (conj_dif!=null&&conj_dif.getMaxY()>0)//Si la salida es mayor a cero, considerala
+                    {
+                        double peso=conj_dif.getMaxY();//Peso de salida de la regla
+                        double valor=conj_dif.momentDefuzzify();//Valor de salida de la válvula
+                        valorTotal+=peso*valor;//Añade la salida al total
+                        pesoTotal+=peso;//Añade el peso al total
+                        lastInferenceProcess.add(rule.toString()+" <i>(Peso: "+formatter.format(peso)+"; valor de la válvula: "+formatter.format(valor)+")</i><br>");
+                    }
                 }
             }
         }
